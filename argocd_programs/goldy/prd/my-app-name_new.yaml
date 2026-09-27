@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: goldy-prd-my-app-name_new
+  namespace: argocd
+
+  labels:
+    tenant: goldy
+    lifecycle: prd
+
+spec:
+  project: goldy-prd
+
+  source:
+    repoURL: string
+    targetRevision: master
+    path: string
+
+
+  destination:
+    server: server
+    namespace: goldy-prd-my-app-name_new
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
