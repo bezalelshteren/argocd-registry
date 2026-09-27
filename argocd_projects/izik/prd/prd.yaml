@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: izik-prd
+  namespace: argocd
+
+  labels:
+    tenant: izik
+    lifecycle: prd
+
+spec:
+  description: "izik - prd"
+
+  sourceRepos:
+    - string
+
+  destinations:
+    - namespace: izik-prd-new_app
+      server: server
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
