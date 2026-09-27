@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: izik-stg
+  namespace: argocd
+
+  labels:
+    tenant: izik
+    lifecycle: stg
+
+spec:
+  description: "izik - stg"
+
+  sourceRepos:
+    - string
+
+  destinations:
+    - namespace: izik-stg-new_app_2
+      server: server
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
