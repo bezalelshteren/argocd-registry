@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: customer-a-dev-my-application
+  namespace: argocd
+
+  labels:
+    tenant: customer-a
+    lifecycle: dev
+
+spec:
+  project: customer-a-dev
+
+  source:
+    repoURL: https://github.com/example/argocd-config.git
+    targetRevision: main
+    path: applications/customer-a/my-application
+
+
+  destination:
+    server: server
+    namespace: customer-a-dev-my-application
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
