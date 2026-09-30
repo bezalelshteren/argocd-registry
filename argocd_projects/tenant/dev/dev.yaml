@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: tenant-dev
+  namespace: argocd
+
+  labels:
+    tenant: tenant
+    lifecycle: dev
+
+spec:
+  description: "tenant - dev"
+
+  sourceRepos:
+    - https://github.com/example/argocd-config.git
+
+  destinations:
+    - namespace: tenant-dev-aoutomation
+      server: server
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

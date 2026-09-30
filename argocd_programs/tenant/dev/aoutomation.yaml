@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: tenant-dev-aoutomation
+  namespace: argocd
+
+  labels:
+    tenant: tenant
+    lifecycle: dev
+
+spec:
+  project: tenant-dev
+
+  source:
+    repoURL: https://github.com/example/argocd-config.git
+    targetRevision: main
+    path: applications/customer-a/my-applic
+
+
+  destination:
+    server: server
+    namespace: tenant-dev-aoutomation
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
