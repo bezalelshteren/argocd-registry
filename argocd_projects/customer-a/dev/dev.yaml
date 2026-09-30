@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: customer-a-dev
+  namespace: argocd
+
+  labels:
+    tenant: customer-a
+    lifecycle: dev
+
+spec:
+  description: "customer-a - dev"
+
+  sourceRepos:
+    - https://github.com/example/argocd-config.git
+
+  destinations:
+    - namespace: customer-a-dev-my-applic
+      server: server
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
