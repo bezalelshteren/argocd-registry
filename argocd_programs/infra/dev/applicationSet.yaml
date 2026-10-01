@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: infra-dev-applications
+  namespace: argocd
+
+  labels:
+    tenant: infra
+    lifecycle: dev
+
+spec:
+  generators:
+    - list:
+        elements:
+
+
+  template:
+    metadata:
+      name: '{{name}}'
+
+      labels:
+        tenant: infra
+        lifecycle: dev
+
+    spec:
+      project: infra-dev
+
+      source:
+        repoURL: https://github.com/example/argocd-config.git
+        targetRevision: master
+        path: '{{path}}'
+
+      destination:
+        server: server
+        namespace: '{{namespace}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - CreateNamespace=true

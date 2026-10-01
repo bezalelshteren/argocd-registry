@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: infra-dev
+  namespace: argocd
+
+  labels:
+    tenant: infra
+    lifecycle: dev
+
+spec:
+  description: "infra - dev"
+
+  sourceRepos:
+    - https://github.com/example/argocd-config.git
+
+  destinations:
+    - namespace: infra-dev-build_namespace
+      server: server
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
