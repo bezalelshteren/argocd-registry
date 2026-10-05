@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-tenant-dev
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - העיה
+        name: admin
+        policies:
+          - p, proj:my-tenant-dev:admin, applications, *, my-tenant-dev/*, allow
+  destinations:
+    - namespace: my-tenant-*
+      name: dev1
+  sourceRepos:
+    - https://github.com/example/argocd-config.git
