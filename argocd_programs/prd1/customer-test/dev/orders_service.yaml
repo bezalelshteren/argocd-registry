@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform2-customer-test-customer-test-dev-orders_service
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: customer-test
+spec:
+  project: customer-test-dev
+  source:
+    repoURL: https://github.com/example/test-argocd-config.git
+    targetRevision: main
+    path: platform2
+    helm:
+      releaseName: platform2-dev-customer-test-dev-orders_service
+      valueFiles:
+        - values.yaml
+  destination:
+    name: platform2
+    namespace: customer-test-dev-orders_service

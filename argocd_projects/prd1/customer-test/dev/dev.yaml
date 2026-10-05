@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-test-dev
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - group: platform-dev
+        name: admin
+        policies:
+          - p, proj:customer-test-dev:admin, applications, *, customer-test-dev/*, allow
+  destinations:
+    - namespace: customer-test-*
+      name: platform2
+  sourceRepos:
+    - https://github.com/example/test-argocd-config.git
