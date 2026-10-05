@@ -12,7 +12,7 @@ spec:
       kind: ResourceQuota
   roles:
     - groups:
-      - העיה
+      - group: העיה
         name: admin
         policies:
           - p, proj:my-tenant-dev:admin, applications, *, my-tenant-dev/*, allow
