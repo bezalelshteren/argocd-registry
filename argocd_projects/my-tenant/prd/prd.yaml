@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-tenant-prd
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - group: fty
+        name: admin
+        policies:
+          - p, proj:my-tenant-prd:admin, applications, *, my-tenant-prd/*, allow
+          - p, proj:my-tenant-prd:admin, exec , create, get, my-tenant-prd/*, allow
+  destinations:
+    - namespace: my-tenant-*
+      name: devops1
+  sourceRepos:
+    - https://github.com/example/argocd-config.git
