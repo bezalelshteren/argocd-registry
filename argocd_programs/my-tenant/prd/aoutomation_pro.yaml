@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: -my-tenant-my-tenant-prd-aoutomation_pro
+  name: devops1-my-tenant-my-tenant-prd-aoutomation_pro
   namespace: blackops-argocd-tenants
   labels:
     blackops/managed: "true"
@@ -11,9 +11,9 @@ spec:
   source:
     repoURL: https://github.com/example/argocd-config.git
     targetRevision: master
-    path: 
+    path: devops1
     helm:
-      releaseName: -prd-my-tenant-prd-aoutomation_pro
+      releaseName: devops1-prd-my-tenant-prd-aoutomation_pro
       valueFiles:
         - values.yaml
   destination:
