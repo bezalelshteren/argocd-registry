@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: -my-tenant-my-tenant-dev-aoutomation_namespace
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: my-tenant
+spec:
+  project: my-tenant-dev
+  source:
+    repoURL: https://github.com/example/argocd-config.git
+    targetRevision: main
+    path: 
+    helm:
+      releaseName: -dev-my-tenant-dev-aoutomation_namespace
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: my-tenant-dev-aoutomation_namespace
