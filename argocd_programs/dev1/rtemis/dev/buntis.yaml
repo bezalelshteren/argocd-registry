@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev1-rtemis-rtemis-dev-buntis
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: rtemis
+spec:
+  project: rtemis-dev
+  source:
+    repoURL: https://github.com/example/test-argocd-config.git
+    targetRevision: master
+    path: dev1
+    helm:
+      releaseName: dev1-dev-rtemis-dev-buntis
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: rtemis-dev-buntis
