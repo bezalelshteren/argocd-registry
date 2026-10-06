@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: rtemis-dev
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - group: me
+        name: admin
+        policies:
+          - p, proj:rtemis-dev:admin, applications, *, rtemis-dev/*, allow
+  destinations:
+    - namespace: rtemis-*
+      name: dev1
+  sourceRepos:
+    - https://github.com/example/test-argocd-config.git
