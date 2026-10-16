@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-beta-prod
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - group: 
+        name: admin
+        policies:
+          - p, proj:customer-beta-prod:admin, applications, *, customer-beta-prod/*, allow
+          - p, proj:customer-beta-prod:admin, exec , create, get, customer-beta-prod/*, allow
+  destinations:
+    - namespace: customer-beta-*
+      name: 
+sourceRepos:
+  - https://gitlab.example.com/prd3-inventory.git
