@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-alpha-dev
+  namespace: blackops-argocd-tenants
+
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+
+  roles:
+    - name: admin
+      groups:
+        - payments-dev
+      policies:
+        - p, proj:customer-alpha-dev:admin, applications, *, customer-alpha-dev/*, allow
+
+  destinations:
+    - namespace: customer-alpha-*
+      name: dev1
+
+  sourceRepos:
+    - https://gitlab.example.com/devdsvdsvsv2-payments.git
