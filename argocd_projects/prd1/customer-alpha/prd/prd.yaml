@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-alpha-prd
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+      - group: 
+        name: admin
+        policies:
+          - p, proj:customer-alpha-prd:admin, applications, *, customer-alpha-prd/*, allow
+          - p, proj:customer-alpha-prd:admin, exec , create, get, customer-alpha-prd/*, allow
+  destinations:
+    - namespace: customer-alpha-*
+      name: 
+sourceRepos:
+  - https://gitlab.example.com/prd2-payments.git
