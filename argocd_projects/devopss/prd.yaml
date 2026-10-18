@@ -5,20 +5,21 @@ metadata:
   namespace: blackops-argocd-tenants
 spec:
   clusterResourceWhitelist:
-    - group: "*"
-      kind: "*"
+  - group: '*'
+    kind: '*'
   namespaceResourceBlacklist:
-    - group: "*"
-      kind: ResourceQuota
+  - group: '*'
+    kind: ResourceQuota
   roles:
-    - groups:
-        - group: backend-dev
-      name: admin
-      policies:
-        - p, proj:devopss-prd:admin, applications, *, devopss-prd/*, allow
-        - p, proj:devopss-prd:admin, exec, create, get, devopss-prd/*, allow
+  - groups:
+    - group: backend-dev
+    name: admin
+    policies:
+    - p, proj:devopss-prd:admin, applications, *, devopss-prd/*, allow
+    - p, proj:devopss-prd:admin, exec, create, get, devopss-prd/*, allow
   destinations:
-    - namespace: devopss-*
-      name: 
+  - namespace: devopss-*
+    name: null
   sourceRepos:
-    - https://gitlab.com/exaccccmple-group/payments-api.git
+  - https://gitlab.com/exaccccmple-group/payments-api.git
+  - https://gitlab.com/exaccmple-group/payments-api.git
