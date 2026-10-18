@@ -3,26 +3,22 @@ kind: AppProject
 metadata:
   name: customer-alpha-dev
   namespace: blackops-argocd-tenants
-
 spec:
   clusterResourceWhitelist:
-    - group: "*"
-      kind: "*"
-
+  - group: '*'
+    kind: '*'
   namespaceResourceBlacklist:
-    - group: "*"
-      kind: ResourceQuota
-
+  - group: '*'
+    kind: ResourceQuota
   roles:
-    - name: admin
-      groups:
-        - payments-dev
-      policies:
-        - p, proj:customer-alpha-dev:admin, applications, *, customer-alpha-dev/*, allow
-
+  - name: admin
+    groups:
+    - payments-dev
+    policies:
+    - p, proj:customer-alpha-dev:admin, applications, *, customer-alpha-dev/*, allow
   destinations:
-    - namespace: customer-alpha-*
-      name: dev1
-
+  - namespace: customer-alpha-*
+    name: dev1
   sourceRepos:
-    - https://gitlab.eyuyccxampe.com/dvvsv2-payments.git
+  - https://gitlab.eyuyccxampe.com/dvvsv2-payments.git
+  - https://gilab.eyuyccxampe.com/dvvsv2-payments.git
