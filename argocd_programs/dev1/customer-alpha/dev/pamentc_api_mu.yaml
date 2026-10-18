@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev1-customer-alpha-customer-alpha-dev-pamentc_api_mu
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: customer-alpha
+spec:
+  project: customer-alpha-dev
+  source:
+    repoURL: https://gitlab.eyuyccxample.com/dvdsvdsvsv2-payments.git
+    targetRevision: master
+    path: dev1
+    helm:
+      releaseName: dev1-dev-customer-alpha-dev-pamentc_api_mu
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: customer-alpha-dev-pamentc_api_mu
