@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-test-prd
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+        - group: platform-dev
+      name: admin
+      policies:
+        - p, proj:customer-test-prd:admin, applications, *, customer-test-prd/*, allow
+        - p, proj:customer-test-prd:admin, exec, create, get, customer-test-prd/*, allow
+  destinations:
+    - namespace: customer-test-*
+      name: 
+  sourceRepos:
+    - https://gitlab.com/your-group/your-repository.git
