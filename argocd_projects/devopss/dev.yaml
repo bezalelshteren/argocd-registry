@@ -3,26 +3,22 @@ kind: AppProject
 metadata:
   name: devopss-dev
   namespace: blackops-argocd-tenants
-
 spec:
   clusterResourceWhitelist:
-    - group: "*"
-      kind: "*"
-
+  - group: '*'
+    kind: '*'
   namespaceResourceBlacklist:
-    - group: "*"
-      kind: ResourceQuota
-
+  - group: '*'
+    kind: ResourceQuota
   roles:
-    - name: admin
-      groups:
-        - 
-      policies:
-        - p, proj:devopss-dev:admin, applications, *, devopss-dev/*, allow
-
+  - name: admin
+    groups:
+    - null
+    policies:
+    - p, proj:devopss-dev:admin, applications, *, devopss-dev/*, allow
   destinations:
-    - namespace: devopss-*
-      name: dev1
-
+  - namespace: devopss-*
+    name: dev1
   sourceRepos:
-    - https://gitlab.com/example-group/payments-api.git
+  - https://gitlab.com/example-group/payments-api.git
+  - https://gitlab.com/exccccample-group/payments-api.git
