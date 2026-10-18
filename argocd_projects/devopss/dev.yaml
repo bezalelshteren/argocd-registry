@@ -25,4 +25,4 @@ spec:
       name: dev1
 
   sourceRepos:
-    - https://gitlab.com/example-group/payments-api.git
+    - https://gitlab.com/exccccample-group/payments-api.git
