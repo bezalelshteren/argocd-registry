@@ -21,4 +21,4 @@ spec:
     - namespace: customer-alpha-*
       name: 
   sourceRepos:
-    - https://gitlab.example.com/prd2-payments.git
+    - https://gitlab.example.com/prd2-ayments.git
