@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev1-devopss-devopss-dev-payments_api
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: devopss
+spec:
+  project: devopss-dev
+  source:
+    repoURL: https://gitlab.com/example-group/payments-api.git
+    targetRevision: master
+    path: dev1
+    helm:
+      releaseName: dev1-dev-devopss-dev-payments_api
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: devopss-dev-payments_api
