@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: devopss-prd
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+        - group: backend-dev
+      name: admin
+      policies:
+        - p, proj:devopss-prd:admin, applications, *, devopss-prd/*, allow
+        - p, proj:devopss-prd:admin, exec, create, get, devopss-prd/*, allow
+  destinations:
+    - namespace: devopss-*
+      name: 
+  sourceRepos:
+    - https://gitlab.com/exaccccmple-group/payments-api.git
