@@ -9,7 +9,7 @@ metadata:
 spec:
   project: customer-test-dev
   source:
-    repoURL: https://gitlab.example.com/dev1.git
+    repoURL: https://gitlab.com/your-group/your-repository.git
     targetRevision: master
     path: dev1
     helm:
