@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev1-custonnmer-te-custonnmer-te-dev-orders-ser11vnb
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: custonnmer-te
+spec:
+  project: custonnmer-te-dev
+  source:
+    repoURL: https://github.com/example/orders-service
+    targetRevision: master
+    path: dev1
+    helm:
+      releaseName: dev1-dev-custonnmer-te-dev-orders-ser11vnb
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: custonnmer-te-dev-orders-ser11vnb

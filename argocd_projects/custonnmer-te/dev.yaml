@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: custonnmer-te-dev
+  namespace: blackops-argocd-tenants
+
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+
+  roles:
+    - name: admin
+      groups:
+        - 
+      policies:
+        - p, proj:custonnmer-te-dev:admin, applications, *, custonnmer-te-dev/*, allow
+
+  destinations:
+    - namespace: custonnmer-te-*
+      name: dev1
+
+  sourceRepos:
+    - https://github.com/example/orders-service
