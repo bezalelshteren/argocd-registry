@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prd1-custonnmer-test1-custonnmer-test1-prd-orders-ser11vicenb
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: custonnmer-test1
+spec:
+  project: custonnmer-test1-prd
+  source:
+    repoURL: https://github.com/example/orders-service
+    targetRevision: master
+    path: prd1
+    helm:
+      releaseName: prd1-prd-custonnmer-test1-prd-orders-ser11vicenb
+      valueFiles:
+        - values.yaml
+  destination:
+    name: prd1
+    namespace: custonnmer-test1-prd-orders-ser11vicenb
