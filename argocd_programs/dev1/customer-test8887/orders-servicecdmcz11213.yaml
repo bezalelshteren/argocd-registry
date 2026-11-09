@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev1-customer-test8887-customer-test8887-dev-orders-servicecdmcz11213
+  namespace: blackops-argocd-tenants
+  labels:
+    blackops/managed: "true"
+    blackops/tenant: customer-test8887
+spec:
+  project: customer-test8887-dev
+  source:
+    repoURL: https://github.com/customer-test/orders-service.git
+    targetRevision: master
+    path: dev1
+    helm:
+      releaseName: dev1-dev-customer-test8887-dev-orders-servicecdmcz11213
+      valueFiles:
+        - values.yaml
+  destination:
+    name: dev1
+    namespace: customer-test8887-dev-orders-servicecdmcz11213
