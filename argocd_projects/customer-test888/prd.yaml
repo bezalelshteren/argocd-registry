@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-test888-prd
+  namespace: blackops-argocd-tenants
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceBlacklist:
+    - group: "*"
+      kind: ResourceQuota
+  roles:
+    - groups:
+        - group: platform-dev
+      name: admin
+      policies:
+        - p, proj:customer-test888-prd:admin, applications, *, customer-test888-prd/*, allow
+        - p, proj:customer-test888-prd:admin, exec, create, get, customer-test888-prd/*, allow
+  destinations:
+    - namespace: customer-test888-*
+      name: 
+  sourceRepos:
+    - https://github.com/customer-test/orders-service.git
